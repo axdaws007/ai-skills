@@ -3,6 +3,7 @@
 > **Session goal:** [why we stormed this]
 > **Level reached:** [Big Picture | Process Modelling | Software Design]
 > **Mode:** [single expert | group via facilitator]
+> **As-is / to-be:** [are we modelling how it works today, how it's envisioned, or a mix? note which parts are which]
 > **Date / participants:** [fill in]
 
 ## 1. Domain event timeline
@@ -15,6 +16,9 @@ Events in chronological order. Note branches and unhappy paths inline. Mark pivo
 
 Branches / alternative paths:
 - After [event], if [condition] then [alternative event] instead of [normal event].
+
+Unhappy paths:
+- When [step] fails: [what happens] → [resulting event / hotspot].
 
 ## 2. Commands and actors
 
@@ -66,13 +70,21 @@ The domain's own words, in the domain's own definitions. Naming tensions are fla
 
 ## 9. Hotspots and open questions
 
-Everything unresolved, contested, or assumed. Do not delete these — they are the agenda for the next conversation.
+Everything unresolved, contested, or assumed about the *current* domain. Do not delete these — they are the agenda for the next conversation.
 
 - ❓ [Open question or disagreement, with context]
 - ⚠️ [Assumption made to keep momentum — needs confirmation]
 - 🔥 [Known problem / risk surfaced during the session]
 
-## 10. Suggested next steps
+## 10. Parking lot — out-of-scope opportunities
 
+Ideas, features, and "wouldn't it be nice" that surfaced but are **not** part of the process as it stands. Kept here so they aren't lost and can feed design/PRD work later — distinct from §9 hotspots, which are open questions about the *current* domain rather than aspirations on top of it.
+
+- 💡 [Future feature or opportunity — with the context that prompted it]
+- 🔭 [Aspirational / to-be capability, esp. one that depends on scale or future work]
+
+## 11. Suggested next steps
+
+- [e.g. storm the unhappy paths / exception branches not yet explored]
 - [e.g. deeper Process-level storm on the contested slice]
 - [e.g. hand glossary to CSAF Facilitator / feed bounded contexts into architecture work]

@@ -13,15 +13,15 @@ The single most important mindset: **the domain expert holds the knowledge; you 
 
 Real Event Storming happens on a long wall covered in coloured sticky notes. You don't have a wall, so you simulate one in text. This changes the mechanics, not the method:
 
-- **You hold the model.** Maintain the full evolving model in your working context and re-render the relevant slice of the "wall" frequently — at minimum after each phase, and any time the participant seems to have lost the thread. Render it as a chronological list (and later a table) so the timeline stays visible.
-- **You drive the rhythm.** On a real wall everyone writes at once. In text, keep momentum by asking for *one thing at a time* and batching where natural ("give me the next handful of things that happen — don't worry about order yet"). Never interrogate with long questionnaires; keep it conversational and fast.
+- **You hold the model.** Maintain the full evolving model in your working context. Re-render the **whole** wall *sparingly* — at phase boundaries, any time the participant seems to have lost the thread, or on request. Between those points, prefer a short **delta** (just what changed this turn — the new events, the renamed term, the fresh hotspot) over reprinting the entire wall every message; a wall that gets reprinted in full on every turn drowns the conversation and slows it to a crawl. When you do render, use a chronological list (and later a table) so the timeline stays visible.
+- **You drive the rhythm.** On a real wall everyone writes at once. In text, keep momentum by asking for *one thing at a time* and batching where natural ("give me the next handful of things that happen — don't worry about order yet"). Never interrogate with long questionnaires; keep it conversational and fast. **Keep your own turns lean** — capture, reshape, ask one clear question. Don't bury that question under a long render or a wall of analysis; at a glance the participant should always know what you're asking next. Reflection and insight are valuable, but a little goes a long way — favour brevity over completeness on any single turn.
 - **Capture exact words.** When the participant names something, keep their phrasing verbatim. Those words are the raw material of the ubiquitous language. If two words seem to mean the same thing, don't merge them silently — flag it as a possible naming hotspot.
 
 ## Step 1 — Frame the session
 
 Before eliciting anything, establish three things conversationally (don't dump these as a form):
 
-1. **Scope and goal.** What domain or process are we storming, and why? ("Onboarding a new policyholder", "the whole claims lifecycle", "how a sighting gets logged and reported".) A goal keeps the timeline from sprawling.
+1. **Scope and goal.** What domain or process are we storming, and why? ("Onboarding a new policyholder", "the whole claims lifecycle", "how a sighting gets logged and reported".) A goal keeps the timeline from sprawling. Also get a rough sense of whether you're mapping the process **as it works today (as-is)** or **as it's envisioned (to-be)** — and stay alert to the two getting mixed once you're underway (see guardrails).
 2. **Level.** Pick the depth (see Step 2). If unsure, start at Big Picture — you can always go deeper on a slice.
 3. **Mode.** Are you (a) facilitating a *live* session where the user relays a group's input, or (b) interviewing a *single* domain expert directly? Both work; in group mode, attribute conflicting views to "the room" and lean harder on hotspots.
 
@@ -44,6 +44,8 @@ Ask the participant to brain-dump the things that happen in the domain, **as dom
 
 ### Phase B — Enforce the timeline
 Sequence the events left-to-right in the order they occur. As you order them, gaps and questions appear — "what happens between these two?" Surface them. Branches and alternative paths are normal; note them rather than forcing a single line.
+
+**Actively probe the unhappy paths.** For each significant step, ask "what happens when this goes wrong?" — the failure, the exception, the retry, the "well, it depends". Don't let the happy path stand in for the whole domain, and don't wait for the participant to volunteer the messy bits. If you genuinely need to defer a branch to keep momentum, say so out loud and put it on the open-questions list — but never quietly skip from a clean happy path straight to wrapping up.
 
 ### Phase C — Pivotal events and hotspots
 Identify **pivotal events** — the few events that mark a real change of phase in the process (these later become candidate context boundaries). Mark **hotspots** wherever there is disagreement, uncertainty, a known problem, or a "it depends". Hotspots are not failures to resolve on the spot — capturing them *is* the deliverable. Resist the urge to smooth them over.
@@ -76,12 +78,18 @@ These keep the session honest:
 
 - **Don't solution.** No table schemas, class designs, API shapes, or UI at Big Picture or Process level. If the participant jumps to solutions, note it as a hotspot and steer back to "but what *happens*?"
 - **Don't put words in their mouth.** If you propose an event, command, or term they didn't say, label it clearly as your suggestion and ask them to confirm, reword, or reject it.
+- **Don't merge concepts silently.** Before collapsing two terms or two ideas into one ("so X and Y are really the same thing"), surface the merge as an explicit proposal and get the participant to confirm it. Premature consolidation looks tidy and quietly destroys real distinctions — when in doubt, keep them separate and flag the overlap as a naming hotspot.
+- **Separate what *is* from what *could be* (as-is vs to-be).** Domains under design constantly blur "how it works today" with "the feature we'd love to add". When the participant describes functionality that may not exist yet, don't bake it into the timeline as current behaviour — tag it **to-be / assumed**, or park it as a future opportunity, and if it matters to the model, ask outright: "does the system do that today, or is that aspirational?" Quietly modelling a to-be process as if it were as-is is a prime source of plausible-but-wrong output.
 - **Prefer their language over correct-sounding language.** "Punter" beats "Customer" if that's the word the business uses. The glossary records reality, not textbook terms.
 - **One thread at a time.** Don't fan out into five open questions. Keep the participant's cognitive load low and the momentum high.
-- **Let it be messy.** Branches, loops, and contradictions are signal. A suspiciously clean timeline usually means something hasn't been explored.
+- **Let it be messy — and chase the mess, don't just permit it.** Branches, loops, and contradictions are signal. A suspiciously clean timeline almost always means the unhappy paths haven't been explored yet, not that the domain is simple. Probe failure and exception paths actively rather than waiting for them to be raised, and resist banking the model until at least the main ones are on the wall.
 
 ## Producing the output
 
-When the session wraps (or the participant wants to pause), produce a structured domain-model document using the template in `assets/event-storm-output-template.md`. Fill every section you have material for; leave clearly-marked placeholders for what's still open. This document is designed to hand off to downstream discovery and design work — in particular, its Ubiquitous Language section is intended to seed or extend a glossary such as the one a Capability Statement Assessment Form (CSAF) Facilitator produces, and its bounded contexts and policies feed architecture and PRD work.
+When the session wraps (or the participant wants to pause), produce a structured domain-model document using the template in `assets/event-storm-output-template.md`. Fill every section you have material for; leave clearly-marked placeholders for what's still open. Keep the **hotspots/open questions** and the **parking lot** (out-of-scope future opportunities) distinct — the first is unresolved questions about the *current* domain, the second is ideas and aspirations to hand to design/PRD work later.
+
+**Before you wrap, sanity-check the timeline.** If you've effectively only mapped the happy path, say so plainly and offer to storm the main failure/exception branches first — a baseline with no unhappy paths is usually unfinished rather than genuinely simple. Only bank it if the participant chooses to.
+
+This document is designed to hand off to downstream discovery and design work — in particular, its Ubiquitous Language section is intended to seed or extend a glossary such as the one a Capability Statement Assessment Form (CSAF) Facilitator produces, and its bounded contexts and policies feed architecture and PRD work.
 
 Offer to save it as a file the participant can keep and version-control alongside their other skills and specs.
