@@ -9,6 +9,7 @@ Read this before facilitating. It defines the sticky-note vocabulary, the gramma
 4. Reshaping bad input
 5. Anti-patterns and failure modes
 6. Group vs solo facilitation notes
+7. The shared glossary (ubiquitous language)
 
 ---
 
@@ -110,3 +111,34 @@ Reshape: "Those status changes are probably events: **Application Submitted**, *
 
 - **Solo expert:** you get depth and consistency but a single viewpoint — flag that blind spots are likely and mark anything they're unsure of as a hotspot.
 - **Group (relayed through the user):** you get conflict, which is gold. When two views differ, don't pick a winner — record both as a hotspot attributed to "the room". Watch for the loudest-voice effect; explicitly ask whether quieter participants would phrase it differently.
+
+## 7. The shared glossary (ubiquitous language)
+
+The ubiquitous-language glossary is a **shared artifact**, not one this skill owns alone. It is written as `UBIQUITOUS_LANGUAGE.md` and is the handoff currency between this skill and the CSAF (Capability Statement Assessment Form) Facilitator. In the expected workflow — **CSAF first, Event Storming second** — CSAF produces the initial *canonical* glossary, you ingest it as a baseline and **extend** it, then hand the same file back enriched. Keep the filename and the columns identical so it round-trips.
+
+### Schema
+
+| Term | Canonical Definition | Rejected Synonyms / Ambiguities | Notes | Status |
+|---|---|---|---|---|
+
+The first four columns are exactly CSAF's format; `Status` is an **additive** column CSAF does not read, so adding it never breaks the upstream skill. A worked illustration:
+
+| Term | Canonical Definition | Rejected Synonyms / Ambiguities | Notes | Status |
+|---|---|---|---|---|
+| Sighting | A confirmed observation of a target vehicle logged by a spotter | "spot", "hit" (informal) | from CSAF | Inherited |
+| Provisional Sighting | A logged observation not yet confirmed against the watchlist | — | timeline revealed "Sighting" splits into provisional vs confirmed — CSAF treated it as one | New |
+| Watchlist | *(CSAF: the set of target vehicles)* | — | spotters say "the list", ops say "the board" — may be two views, not one term | Contested → hotspot H3 |
+
+### Status values
+- **Inherited** — carried from the incoming glossary unchanged.
+- **Refined** — inherited, but you sharpened or corrected the definition. Record what changed in Notes.
+- **New** — first surfaced during this Event Storming session.
+- **Contested** — the domain's behaviour, as it appeared on the timeline, conflicts with the term or its inherited definition. Describe the tension in Notes and cross-reference the matching hotspot (§9 of the output document). You **flag** this; you do not resolve it — the session that set the canonical term owns the decision to change it.
+
+If you are starting with no incoming glossary, every row is simply `New` and the column does no extra work — but keep it, so the document is ready to hand to CSAF or a later storm.
+
+### Two rules that keep both philosophies intact
+CSAF resolves language to a single canonical term and records what it beat; Event Storming refuses to merge concepts prematurely. Both hold at once if you observe:
+
+1. **Only fill *Rejected Synonyms / Ambiguities* on explicit confirmation.** When the participant clearly says "X and Y are the same — call it X", record Y as rejected. Otherwise the two stay as separate rows (or one `Contested` row) with the tension noted — never collapsed on your own judgement.
+2. **Flag, never overrule, inherited terms.** A canonical term you were handed was decided by the people in the earlier room. If behaviour contradicts it, mark it `Contested` and raise a hotspot; don't quietly redefine, merge, or delete it.

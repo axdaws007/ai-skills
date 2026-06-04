@@ -19,11 +19,12 @@ Real Event Storming happens on a long wall covered in coloured sticky notes. You
 
 ## Step 1 — Frame the session
 
-Before eliciting anything, establish three things conversationally (don't dump these as a form):
+Before eliciting anything, establish these conversationally (don't dump them as a form):
 
 1. **Scope and goal.** What domain or process are we storming, and why? ("Onboarding a new policyholder", "the whole claims lifecycle", "how a sighting gets logged and reported".) A goal keeps the timeline from sprawling. Also get a rough sense of whether you're mapping the process **as it works today (as-is)** or **as it's envisioned (to-be)** — and stay alert to the two getting mixed once you're underway (see guardrails).
 2. **Level.** Pick the depth (see Step 2). If unsure, start at Big Picture — you can always go deeper on a slice.
 3. **Mode.** Are you (a) facilitating a *live* session where the user relays a group's input, or (b) interviewing a *single* domain expert directly? Both work; in group mode, attribute conflicting views to "the room" and lean harder on hotspots.
+4. **Existing glossary.** Ask whether a ubiquitous-language document already exists for this domain — in particular a `UBIQUITOUS_LANGUAGE.md` from a prior CSAF (Capability Statement Assessment Form) Facilitator session. The expected workflow is **CSAF first, Event Storming second**, so often there will be one. If it exists, ingest it as your **baseline glossary**: carry its terms forward untouched and treat them as the starting point to *extend and pressure-test*, not to replace. You did not author those definitions — the workshop that produced them did — so where the domain's behaviour later contradicts one, you *flag* it (never silently overrule it). If no such document exists, you build the glossary from scratch as before. See "Capture continuously" for the shared schema.
 
 ## Step 2 — Choose the level
 
@@ -37,7 +38,7 @@ Run the phases below in order. Big Picture uses Phases A–C; Process Modelling 
 
 ## The facilitation flow
 
-Full per-element question banks and the notation/colour legend live in `references/notation-and-grammar.md` — read it before facilitating so you enforce the grammar correctly. The essentials:
+Full per-element question banks, the notation/colour legend, and the shared glossary schema live in `references/notation-and-grammar.md` — read it before facilitating so you enforce the grammar correctly. The essentials:
 
 ### Phase A — Chaotic exploration (domain events)
 Ask the participant to brain-dump the things that happen in the domain, **as domain events: past tense, business-meaningful outcomes** ("Order Placed", "Payment Received", "Sighting Logged"). Past tense is not a formality — it forces outcome-thinking instead of UI clicks or CRUD operations. Don't worry about order or completeness yet; chase volume and energy. Gently reshape anything phrased as a screen, a button, or a database action into the event it produces.
@@ -69,7 +70,7 @@ Cluster the timeline where the language or responsibility changes — those clus
 
 Two things you maintain throughout every phase, not as a final step:
 
-- **Ubiquitous language glossary.** Every time a domain term appears, record it with the participant's own definition. Where the same thing has two names, or one name means two things, log it as a naming hotspot — ambiguous language is the single biggest source of downstream design drift, so this glossary is one of the most valuable artifacts the session produces.
+- **Ubiquitous language glossary.** Maintain it continuously. If you ingested a baseline glossary at framing (e.g. a CSAF `UBIQUITOUS_LANGUAGE.md`), you are *extending and pressure-testing* it, not starting over — carry its rows forward untouched and mark every new or changed row with a **Status** (`Inherited` / `Refined` / `New` / `Contested`). If you're starting fresh, every row is `New`. Record each term in the participant's own words; where one thing has two names, or one name means two things, log it as a naming hotspot rather than resolving it — ambiguous language is the single biggest source of downstream design drift, so this glossary is one of the most valuable artifacts the session produces. Two hard rules: **flag, never overrule** a term inherited from an earlier session (mark it `Contested` and raise a hotspot — the workshop that set it owns the decision to change it), and **never self-resolve a tension into the canonical glossary** — only collapse synonyms when the participant explicitly confirms it. The full five-column schema and Status legend are in `references/notation-and-grammar.md`.
 - **Hotspots / open questions.** Keep a running list of everything unresolved, contested, or assumed. Never delete a hotspot to make the model look tidy.
 
 ## Facilitation guardrails
@@ -79,6 +80,7 @@ These keep the session honest:
 - **Don't solution.** No table schemas, class designs, API shapes, or UI at Big Picture or Process level. If the participant jumps to solutions, note it as a hotspot and steer back to "but what *happens*?"
 - **Don't put words in their mouth.** If you propose an event, command, or term they didn't say, label it clearly as your suggestion and ask them to confirm, reword, or reject it.
 - **Don't merge concepts silently.** Before collapsing two terms or two ideas into one ("so X and Y are really the same thing"), surface the merge as an explicit proposal and get the participant to confirm it. Premature consolidation looks tidy and quietly destroys real distinctions — when in doubt, keep them separate and flag the overlap as a naming hotspot.
+- **Honour an inherited glossary; don't quietly rewrite it.** When you start from a glossary handed over by an earlier session (e.g. CSAF), its canonical terms were decided by the people in that room. If the domain's behaviour contradicts one, mark it `Contested` and raise a hotspot so they can settle it — never silently redefine, merge, or drop an inherited term to make your model tidy.
 - **Separate what *is* from what *could be* (as-is vs to-be).** Domains under design constantly blur "how it works today" with "the feature we'd love to add". When the participant describes functionality that may not exist yet, don't bake it into the timeline as current behaviour — tag it **to-be / assumed**, or park it as a future opportunity, and if it matters to the model, ask outright: "does the system do that today, or is that aspirational?" Quietly modelling a to-be process as if it were as-is is a prime source of plausible-but-wrong output.
 - **Prefer their language over correct-sounding language.** "Punter" beats "Customer" if that's the word the business uses. The glossary records reality, not textbook terms.
 - **One thread at a time.** Don't fan out into five open questions. Keep the participant's cognitive load low and the momentum high.
@@ -90,6 +92,6 @@ When the session wraps (or the participant wants to pause), produce a structured
 
 **Before you wrap, sanity-check the timeline.** If you've effectively only mapped the happy path, say so plainly and offer to storm the main failure/exception branches first — a baseline with no unhappy paths is usually unfinished rather than genuinely simple. Only bank it if the participant chooses to.
 
-This document is designed to hand off to downstream discovery and design work — in particular, its Ubiquitous Language section is intended to seed or extend a glossary such as the one a Capability Statement Assessment Form (CSAF) Facilitator produces, and its bounded contexts and policies feed architecture and PRD work.
+This document is designed to hand off to downstream design work — its bounded contexts and policies feed architecture and PRD work. Its Ubiquitous Language section is the **return leg** of a glossary handoff: where this session began from a CSAF Facilitator's `UBIQUITOUS_LANGUAGE.md`, you hand back the *same file* enriched — inherited terms preserved, `New` and `Refined` terms added, and `Contested` ones flagged for the CSAF owner to adjudicate. Keep the filename and the schema identical so the document round-trips cleanly between the two skills. If no glossary came in, you produce a fresh one in that same schema, ready for CSAF or a later storm to pick up.
 
 Offer to save it as a file the participant can keep and version-control alongside their other skills and specs.

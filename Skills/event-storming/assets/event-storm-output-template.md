@@ -4,6 +4,7 @@
 > **Level reached:** [Big Picture | Process Modelling | Software Design]
 > **Mode:** [single expert | group via facilitator]
 > **As-is / to-be:** [are we modelling how it works today, how it's envisioned, or a mix? note which parts are which]
+> **Glossary baseline:** [none — built fresh | extended from a CSAF UBIQUITOUS_LANGUAGE.md (note its date/source)]
 > **Date / participants:** [fill in]
 
 ## 1. Domain event timeline
@@ -62,11 +63,19 @@ Clusters where language or ownership changes. Pivotal events usually sit on the 
 
 ## 8. Ubiquitous language glossary
 
-The domain's own words, in the domain's own definitions. Naming tensions are flagged.
+The domain's own words, in the domain's own definitions. This is the shared `UBIQUITOUS_LANGUAGE.md` — if a prior CSAF session produced one, this section **is** that file carried forward and enriched (do not start a second glossary). Keep the schema and filename identical so it round-trips between the skills.
 
-| Term | Definition (in the expert's words) | Notes / naming hotspot |
-|---|---|---|
-| [Term] | [definition] | [e.g. "the room used 'client' and 'punter' interchangeably — confirm"] |
+| Term | Canonical Definition | Rejected Synonyms / Ambiguities | Notes | Status |
+|---|---|---|---|---|
+| [Term] | [definition in the domain's words] | [only when a synonym collapse was explicitly confirmed] | [context, or the tension if contested] | [Inherited / Refined / New / Contested] |
+
+**Status:**
+- `Inherited` — carried from the incoming glossary unchanged.
+- `Refined` — inherited, but the definition was sharpened or corrected (say what changed in Notes).
+- `New` — first surfaced during this session.
+- `Contested` — the domain's behaviour conflicts with the term or its inherited definition; describe the tension in Notes and cross-reference the matching hotspot in §9. Flagged, never overruled — the session that set the canonical term owns the decision to change it.
+
+Never write into *Rejected Synonyms / Ambiguities* on your own initiative — only when the participant explicitly confirms that one term replaces another. Unconfirmed tensions stay `Contested` with a hotspot.
 
 ## 9. Hotspots and open questions
 
@@ -87,4 +96,4 @@ Ideas, features, and "wouldn't it be nice" that surfaced but are **not** part of
 
 - [e.g. storm the unhappy paths / exception branches not yet explored]
 - [e.g. deeper Process-level storm on the contested slice]
-- [e.g. hand glossary to CSAF Facilitator / feed bounded contexts into architecture work]
+- [e.g. return the enriched `UBIQUITOUS_LANGUAGE.md` to the CSAF owner — especially any `Contested` terms needing adjudication — and feed bounded contexts into architecture work]
